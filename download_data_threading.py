@@ -22,7 +22,7 @@ def download_site(url):
 
 
 def download_all_sites(sites):
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor: # we use 5 threads
         executor.map(download_site, sites)
 
 
@@ -35,3 +35,10 @@ if __name__ == "__main__":
     download_all_sites(sites)
     duration = time.time() - start_time
     print(f"Downloaded {len(sites)} in {duration} seconds")
+
+# Explanations:
+# ThreadPoolExecutor = Thread + Pool + Executor.
+
+# Thread is just a train of thought. 
+# The Pool portion is where it starts to get interesting. This object is going to create a pool of threads, each of which can run concurrently. 
+# Finally, the Executor is the part that’s going to control how and when each of the threads in the pool will run. It will execute the request in the pool.
